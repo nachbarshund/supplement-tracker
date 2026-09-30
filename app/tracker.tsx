@@ -251,6 +251,8 @@ const fmt = (n: number) => n.toFixed(1).replace('.', ',')
 
 const CSS = `
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
+#start,#bestenliste,#produkte{scroll-margin-top:16px}
 .app{display:flex;min-height:100vh;background:${C.bg};color:${C.ink};font-family:'Hanken Grotesk',system-ui,sans-serif}
 .side{width:88px;flex-shrink:0;position:sticky;top:0;height:100vh;padding:28px 0;display:flex;flex-direction:column;align-items:center;gap:28px;background:#fff;border-radius:0 32px 32px 0}
 .main{flex:1;min-width:0;padding:40px;display:flex;flex-direction:column;gap:16px}
@@ -352,9 +354,9 @@ const IcoTrophy = () => <svg {...ico}><path d="M8 4h8v5a4 4 0 0 1-8 0z" /><path 
 const IcoLock = () => <svg {...ico}><path d="M10 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5M15 8l4 4-4 4M19 12H9" /></svg>
 const IcoSearch = () => <svg {...ico} width={18} height={18}><circle cx="11" cy="11" r="6.5" /><path d="M20 20l-4.2-4.2" /></svg>
 
-function NavBtn({ href, label, icon, active }: { href: string; label: string; icon: React.ReactNode; active?: boolean }) {
+function NavBtn({ href, label, icon, active, onClick }: { href: string; label: string; icon: React.ReactNode; active?: boolean; onClick?: () => void }) {
   return (
-    <a href={href} aria-label={label} style={{ width: 48, height: 48, borderRadius: 16, background: active ? C.ink : 'transparent', color: active ? '#fff' : C.mute, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>{icon}</a>
+    <a href={href} aria-label={label} aria-current={active ? 'page' : undefined} onClick={onClick} style={{ width: 48, height: 48, borderRadius: 16, background: active ? C.ink : 'transparent', color: active ? '#fff' : C.mute, display: 'flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}>{icon}</a>
   )
 }
 
@@ -410,13 +412,31 @@ export default function TrackerApp() {
   const [filter, sF] = useState<'all' | 'open' | 'esn' | 'more'>('all')
   const [q, sQ] = useState('')
   const [sv, sSv] = useState('idle')
+  const [base, sBase] = useState<Record<string, Record<string, number>> | null>(null)
+  const [nav, sNav] = useState('start')
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     fetch('/api/ratings').then(r => r.json()).then(d => {
       if (d.ratings) sR(d.ratings)
       if (d.notes) sN(d.notes)
-    }).catch(() => {})
+      sBase(d.ratings || {})
+    }).catch(() => sBase({}))
+  }, [])
+
+  useEffect(() => {
+    const ids = ['start', 'bestenliste', 'produkte']
+    const onScroll = () => {
+      let cur = ids[0]
+      for (const id of ids) {
+        const el = document.getElementById(id)
+        if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) cur = id
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) cur = ids[ids.length - 1]
+      sNav(cur)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const save = useCallback((r: typeof rats, n: typeof notes) => {
@@ -444,7 +464,7 @@ export default function TrackerApp() {
   const groups = [...CATS].sort((a, b) => b.tu - a.tu).map(cat => ({
     cat,
     items: all.filter(i => i.cat.id === cat.id
-      && (filter === 'all' || (filter === 'open' ? i.stars === 0 : cat.brand === filter))
+      && (filter === 'all' || (filter === 'open' ? ((base ? (base[cat.id] || {})[i.v.n] || 0 : i.stars) === 0) : cat.brand === filter))
       && (!ql || i.v.n.toLowerCase().includes(ql) || cat.label.toLowerCase().includes(ql)))
       .sort((a, b) => b.v.c - a.v.c),
   })).filter(g => g.items.length)
@@ -462,9 +482,9 @@ export default function TrackerApp() {
       <aside className="side">
         <Logo />
         <nav style={{ display: 'flex', flexDirection: 'column', gap: 8 }} aria-label="Navigation">
-          <NavBtn href="#start" label="Start" icon={<IcoHome />} active />
-          <NavBtn href="#produkte" label="Produkte" icon={<IcoGrid />} />
-          <NavBtn href="#bestenliste" label="Bestenliste" icon={<IcoTrophy />} />
+          <NavBtn href="#start" label="Start" icon={<IcoHome />} active={nav === 'start'} onClick={() => sNav('start')} />
+          <NavBtn href="#produkte" label="Produkte" icon={<IcoGrid />} active={nav === 'produkte'} onClick={() => sNav('produkte')} />
+          <NavBtn href="#bestenliste" label="Bestenliste" icon={<IcoTrophy />} active={nav === 'bestenliste'} onClick={() => sNav('bestenliste')} />
         </nav>
         <div style={{ marginTop: 'auto' }}><NavBtn href="/login" label="Sperren" icon={<IcoLock />} /></div>
       </aside>
@@ -593,9 +613,9 @@ export default function TrackerApp() {
       </main>
 
       <nav className="bnav" aria-label="Navigation">
-        <NavBtn href="#start" label="Start" icon={<IcoHome />} active />
-        <NavBtn href="#produkte" label="Produkte" icon={<IcoGrid />} />
-        <NavBtn href="#bestenliste" label="Bestenliste" icon={<IcoTrophy />} />
+        <NavBtn href="#start" label="Start" icon={<IcoHome />} active={nav === 'start'} onClick={() => sNav('start')} />
+        <NavBtn href="#produkte" label="Produkte" icon={<IcoGrid />} active={nav === 'produkte'} onClick={() => sNav('produkte')} />
+        <NavBtn href="#bestenliste" label="Bestenliste" icon={<IcoTrophy />} active={nav === 'bestenliste'} onClick={() => sNav('bestenliste')} />
         <NavBtn href="/login" label="Sperren" icon={<IcoLock />} />
       </nav>
     </div>
