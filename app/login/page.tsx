@@ -8,7 +8,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  async function handleLogin() {
+  async function handleLogin(e?: React.FormEvent) {
+    e?.preventDefault()
     setLoading(true); setErr('')
     const res = await fetch('/api/login', {
       method: 'POST',
@@ -19,22 +20,35 @@ export default function LoginPage() {
     else { setErr('Falsches Passwort'); setLoading(false) }
   }
 
+  const ink = '#10262d', mute = '#58707a'
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F2F2F7', fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif' }}>
-      <div style={{ background: '#FFF', borderRadius: 20, padding: '36px 28px', width: 320, boxShadow: '0 4px 24px rgba(0,0,0,.12)' }}>
-        <div style={{ fontSize: 48, textAlign: 'center', marginBottom: 12 }}>🏋️</div>
-        <h1 style={{ color: '#000', fontSize: 22, fontWeight: 700, textAlign: 'center', margin: '0 0 4px', letterSpacing: -.4 }}>Supplement Tracker</h1>
-        <p style={{ color: '#6C6C70', fontSize: 13, textAlign: 'center', margin: '0 0 28px' }}>MORE & ESN Bewertungen</p>
-        <input type="password" placeholder="Passwort" value={pw}
-          onChange={e => setPw(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleLogin()}
-          style={{ width: '100%', background: '#F2F2F7', border: 'none', borderRadius: 10, color: '#000', fontSize: 15, padding: '12px 14px', outline: 'none', boxSizing: 'border-box', marginBottom: err ? 8 : 12, fontFamily: 'inherit' }}
-        />
-        {err && <p style={{ color: '#FF3B30', fontSize: 12, margin: '0 0 10px', textAlign: 'center' }}>{err}</p>}
-        <button onClick={handleLogin} disabled={loading || !pw}
-          style={{ width: '100%', background: '#007AFF', color: '#FFF', border: 'none', borderRadius: 10, padding: '13px', fontSize: 15, fontWeight: 600, cursor: loading || !pw ? 'not-allowed' : 'pointer', opacity: loading || !pw ? 0.5 : 1, fontFamily: 'inherit' }}>
-          {loading ? 'Prüfe…' : 'Einloggen'}
-        </button>
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', background: '#e6eff1', color: ink }}>
+      <div style={{ width: '100%', maxWidth: 440, padding: '44px clamp(24px,6vw,44px)', borderRadius: 32, background: '#fff', boxShadow: '0 20px 60px rgba(16,38,45,.10)', display: 'flex', flexDirection: 'column', gap: 32 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <svg width="56" height="56" viewBox="0 0 48 48" role="img" aria-label="Supplement Ratings Logo">
+            <rect width="48" height="48" rx="14" fill={ink} />
+            <g transform="rotate(-38 24 26)"><rect x="8" y="19" width="32" height="14" rx="7" fill="#1f7a85" /><path d="M24 19h9a7 7 0 0 1 0 14h-9z" fill="#f0a52b" /></g>
+            <path d="M35 6.5l1.9 4.1 4.4.5-3.3 3 .9 4.4-3.9-2.2-3.9 2.2.9-4.4-3.3-3 4.4-.5z" fill="#fff" />
+          </svg>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            <h1 style={{ margin: 0, fontSize: 36, lineHeight: 1.1, fontFamily: "'Bricolage Grotesque',Georgia,sans-serif", fontWeight: 600, letterSpacing: '-0.02em' }}>Supplement Ratings</h1>
+            <p style={{ margin: 0, fontSize: 16, lineHeight: 1.5, color: mute }}>Deine ESN- und MORE-Produkte, ehrlich bewertet.</p>
+          </div>
+        </div>
+        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <label htmlFor="pw" style={{ fontSize: 14, fontWeight: 600 }}>Passwort</label>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, height: 56, padding: '0 18px', background: '#e6eff1', borderRadius: 16, color: mute }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+            <input id="pw" type="password" placeholder="Passwort eingeben" value={pw} onChange={e => setPw(e.target.value)} autoComplete="current-password"
+              style={{ flexGrow: 1, minWidth: 0, border: 'none', outline: 'none', background: 'transparent', fontSize: 17, color: ink, fontFamily: 'inherit' }} />
+          </div>
+          {err && <p role="alert" style={{ margin: 0, fontSize: 14, color: '#b3261e' }}>{err}</p>}
+          <button type="submit" disabled={loading || !pw}
+            style={{ height: 56, border: 'none', borderRadius: 16, background: ink, color: '#fff', fontSize: 17, fontWeight: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, cursor: loading || !pw ? 'not-allowed' : 'pointer', opacity: loading || !pw ? 0.6 : 1, fontFamily: 'inherit' }}>
+            {loading ? 'Prüfe…' : 'Entsperren'}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </button>
+        </form>
       </div>
     </div>
   )
