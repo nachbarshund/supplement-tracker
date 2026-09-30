@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Logo from '../logo'
 
 export default function LoginPage() {
   const [pw, setPw] = useState('')
@@ -25,11 +26,7 @@ export default function LoginPage() {
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', background: '#e6eff1', color: ink }}>
       <div style={{ width: '100%', maxWidth: 440, padding: '44px clamp(24px,6vw,44px)', borderRadius: 32, background: '#fff', boxShadow: '0 20px 60px rgba(16,38,45,.10)', display: 'flex', flexDirection: 'column', gap: 32 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          <svg width="56" height="56" viewBox="0 0 48 48" role="img" aria-label="Supplement Ratings Logo">
-            <rect width="48" height="48" rx="14" fill={ink} />
-            <g transform="rotate(-38 24 26)"><rect x="8" y="19" width="32" height="14" rx="7" fill="#1f7a85" /><path d="M24 19h9a7 7 0 0 1 0 14h-9z" fill="#f0a52b" /></g>
-            <path d="M35 6.5l1.9 4.1 4.4.5-3.3 3 .9 4.4-3.9-2.2-3.9 2.2.9-4.4-3.3-3 4.4-.5z" fill="#fff" />
-          </svg>
+          <Logo size={56} />
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             <h1 style={{ margin: 0, fontSize: 36, lineHeight: 1.1, fontFamily: "'Bricolage Grotesque',Georgia,sans-serif", fontWeight: 600, letterSpacing: '-0.02em' }}>Supplement Ratings</h1>
             <p style={{ margin: 0, fontSize: 16, lineHeight: 1.5, color: mute }}>Deine ESN- und MORE-Produkte, ehrlich bewertet.</p>

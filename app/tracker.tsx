@@ -232,6 +232,8 @@ const CATS = [
     ]},
 ]
 
+import Logo from './logo'
+
 type Cat = typeof CATS[0]
 type Item = { cat: Cat; v: Cat['v'][0]; stars: number; note: string }
 
@@ -338,16 +340,6 @@ function CardHead({ title, meta }: { title: string; meta?: string }) {
   )
 }
 
-function Logo({ size = 44 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" role="img" aria-label="Supplement Ratings Logo">
-      <rect width="48" height="48" rx="14" fill={C.ink} />
-      <g transform="rotate(-38 24 26)"><rect x="8" y="19" width="32" height="14" rx="7" fill={C.teal} /><path d="M24 19h9a7 7 0 0 1 0 14h-9z" fill={C.amber} /></g>
-      <path d="M35 6.5l1.9 4.1 4.4.5-3.3 3 .9 4.4-3.9-2.2-3.9 2.2.9-4.4-3.3-3 4.4-.5z" fill="#fff" />
-    </svg>
-  )
-}
-
 const ico = { width: 22, height: 22, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const, 'aria-hidden': true }
 const IcoHome = () => <svg {...ico}><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" /></svg>
 const IcoGrid = () => <svg {...ico}><rect x="4" y="4" width="7" height="7" rx="1.5" /><rect x="13" y="4" width="7" height="7" rx="1.5" /><rect x="4" y="13" width="7" height="7" rx="1.5" /><rect x="13" y="13" width="7" height="7" rx="1.5" /></svg>
@@ -415,6 +407,8 @@ export default function TrackerApp() {
   const [sv, sSv] = useState('idle')
   const [base, sBase] = useState<Record<string, Record<string, number>> | null>(null)
   const [nav, sNav] = useState('start')
+  const [fresh, sFresh] = useState<Record<string, boolean>>({})
+  const freshT = useRef<Record<string, ReturnType<typeof setTimeout>>>({})
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -459,7 +453,15 @@ export default function TrackerApp() {
     }, 800)
   }, [])
 
-  const onR = (ci: string, vn: string, x: number) => { const nr = { ...rats, [ci]: { ...(rats[ci] || {}), [vn]: x } }; sR(nr); save(nr, notes) }
+  const onR = (ci: string, vn: string, x: number) => {
+    const nr = { ...rats, [ci]: { ...(rats[ci] || {}), [vn]: x } }; sR(nr); save(nr, notes)
+    const k = ci + '|' + vn
+    if (freshT.current[k]) clearTimeout(freshT.current[k])
+    if (x > 0) {
+      sFresh(f => ({ ...f, [k]: true }))
+      freshT.current[k] = setTimeout(() => sFresh(f => { const c = { ...f }; delete c[k]; return c }), 2500)
+    } else sFresh(f => { const c = { ...f }; delete c[k]; return c })
+  }
   const onN = (ci: string, vn: string, x: string) => { const nn = { ...notes, [ci]: { ...(notes[ci] || {}), [vn]: x } }; sN(nn); save(rats, nn) }
 
   const all: Item[] = CATS.flatMap(cat => cat.v.map(v => ({ cat, v, stars: (rats[cat.id] || {})[v.n] || 0, note: (notes[cat.id] || {})[v.n] || '' })))
@@ -467,6 +469,8 @@ export default function TrackerApp() {
   const open = all.filter(i => i.stars === 0).sort((a, b) => b.v.c - a.v.c)
   const avg = rated.length ? rated.reduce((s, i) => s + i.stars, 0) / rated.length : 0
   const brandAvg = (b: string) => { const r = rated.filter(i => i.cat.brand === b); return r.length ? r.reduce((s, i) => s + i.stars, 0) / r.length : 0 }
+  const cardOpen = all.filter(i => i.stars === 0 || fresh[i.cat.id + '|' + i.v.n])
+    .sort((a, b) => b.v.c - a.v.c)
   const top = [...rated].sort((a, b) => b.stars - a.stars || b.v.c - a.v.c).slice(0, 3)
   const tot = CATS.reduce((s, c) => s + c.tu, 0)
 
@@ -591,14 +595,16 @@ export default function TrackerApp() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <CardHead title="Noch nicht bewertet" meta={`${open.length} offen`} />
               {open.length === 0 && <p style={{ margin: '12px 0 0', color: C.mute, fontSize: 15 }}>Nichts offen.</p>}
-              {open.slice(0, 3).map((it, i) => (
+              {cardOpen.slice(0, 3).map((it, i) => (
                 <div key={it.cat.id + it.v.n} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '12px 0', borderTop: i ? `1px solid ${C.line}` : 'none' }}>
                   <Chip src={it.v.img} alt="" brand={it.cat.brand} />
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6, flexGrow: 1, minWidth: 0 }}>
                     <span style={{ fontSize: 15, fontWeight: 600 }}>{it.v.n}</span>
                     <span style={{ fontSize: 13, color: C.mute }}>{it.cat.label}</span>
                   </div>
-                  <RateInline onR={x => onR(it.cat.id, it.v.n, x)} label={`${it.v.n} bewerten`} />
+                  {it.stars > 0
+                    ? <Stars v={it.stars} s={20} on={x => onR(it.cat.id, it.v.n, x)} label={`${it.v.n} bewerten`} />
+                    : <RateInline onR={x => onR(it.cat.id, it.v.n, x)} label={`${it.v.n} bewerten`} />}
                 </div>
               ))}
             </div>
