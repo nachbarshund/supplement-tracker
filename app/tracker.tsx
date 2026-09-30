@@ -247,6 +247,7 @@ const BR: Record<string, { bg: string; fg: string; label: string; letter: string
 }
 const DISPLAY = "'Bricolage Grotesque',Georgia,sans-serif"
 const STAR = 'M12 3.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 17l-5.4 3 1.2-6L3.3 9.8l6.1-.7z'
+const LS = 'supplement-ratings-v1'
 const fmt = (n: number) => n.toFixed(1).replace('.', ',')
 
 const CSS = `
@@ -417,11 +418,17 @@ export default function TrackerApp() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    fetch('/api/ratings').then(r => r.json()).then(d => {
-      if (d.ratings) sR(d.ratings)
-      if (d.notes) sN(d.notes)
-      sBase(d.ratings || {})
-    }).catch(() => sBase({}))
+    let local: { ratings?: any; notes?: any } = {}
+    try { local = JSON.parse(localStorage.getItem(LS) || '{}') } catch {}
+    const has = (o: any) => o && Object.values(o).some((c: any) => Object.keys(c || {}).length)
+    fetch('/api/ratings').then(r => { if (!r.ok) throw new Error(String(r.status)); return r.json() }).then(d => {
+      const useLocal = !has(d.ratings) && has(local.ratings)
+      const r = useLocal ? local.ratings : d.ratings || {}
+      const n = useLocal ? local.notes || {} : d.notes || {}
+      sR(r); sN(n); sBase(r)
+      if (d.persistent === false) sSv('nopersist')
+      if (useLocal) save(r, n)
+    }).catch(() => { sR(local.ratings || {}); sN(local.notes || {}); sBase(local.ratings || {}); sSv('error') })
   }, [])
 
   useEffect(() => {
@@ -441,10 +448,13 @@ export default function TrackerApp() {
 
   const save = useCallback((r: typeof rats, n: typeof notes) => {
     if (timer.current) clearTimeout(timer.current); sSv('saving')
+    try { localStorage.setItem(LS, JSON.stringify({ ratings: r, notes: n })) } catch {}
     timer.current = setTimeout(async () => {
       try {
-        await fetch('/api/ratings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ratings: r, notes: n }) })
-        sSv('saved'); setTimeout(() => sSv('idle'), 2000)
+        const res = await fetch('/api/ratings', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ratings: r, notes: n }) })
+        if (!res.ok) throw new Error(String(res.status))
+        const d = await res.json()
+        sSv(d.persistent === false ? 'nopersist' : 'saved'); setTimeout(() => sSv(v => v === 'saved' ? 'idle' : v), 2000)
       } catch { sSv('error') }
     }, 800)
   }, [])
@@ -496,7 +506,8 @@ export default function TrackerApp() {
               Guten Tag, Christopher
               {sv === 'saving' && <span style={{ marginLeft: 10, color: C.openFg }}>Speichert…</span>}
               {sv === 'saved' && <span style={{ marginLeft: 10, color: C.teal }}>✓ Gespeichert</span>}
-              {sv === 'error' && <span style={{ marginLeft: 10, color: '#b3261e' }}>Fehler beim Speichern</span>}
+              {sv === 'error' && <span style={{ marginLeft: 10, color: '#b3261e' }}>Server-Speichern fehlgeschlagen (nur in diesem Browser gesichert)</span>}
+              {sv === 'nopersist' && <span style={{ marginLeft: 10, color: '#b3261e' }}>Kein dauerhafter Speicher konfiguriert (nur in diesem Browser gesichert)</span>}
             </span>
             <h1 className="h1" style={{ margin: 0, fontFamily: DISPLAY, fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1.1 }}>Wie gut sind Deine Supplements?</h1>
           </div>
