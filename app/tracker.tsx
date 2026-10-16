@@ -56,15 +56,16 @@ const CATS = [
   { id: 'pic', label: 'Protein Iced Coffee', sub: 'High Protein · 500g', brand: 'more', e: '☕',
     hero: img('protein-iced-coffee-dark-chocolate-lover-ai-product.jpg', 800),
     thumb: img('protein-iced-coffee-dark-chocolate-lover-ai-product.jpg', 100),
-    tu: 12, v: [
+    tu: 14, v: [
       { n: 'Dark Chocolate Lover', c: 4, img: img('protein-iced-coffee-dark-chocolate-lover-ai-product.jpg', 120) },
       { n: 'Brownie Marshmallow', c: 2, img: img('protein-iced-coffee-brownie-marshmallow-ai-product.jpg', 120) },
       { n: 'Cafe Frappe Style', c: 1, img: img('protein-iced-coffee-cafe-frappe-style-ai-product.jpg', 120) },
-      { n: 'Dark Choco Cookie', c: 1, img: img('protein-iced-coffee-dark-cookie-crumble-ai-product.jpg', 120) },
+      { n: 'Dark Choco Cookie', c: 2, img: img('protein-iced-coffee-dark-cookie-crumble-ai-product.jpg', 120) },
       { n: 'Creme Brulee', c: 1, img: img('protein-iced-coffee-aiimg116.jpg', 120) },
       { n: 'Chocolate Amaretto', c: 1, img: '' },
       { n: 'Salted Caramel Brownie', c: 1, img: img('protein-iced-coffee-aiimg138.jpg', 120) },
       { n: 'Latte Macchiato', c: 1, img: img('protein-iced-coffee-latte-macchiato-ai-product.jpg', 120) },
+      { n: 'Toffee Nut Crunch Latte', c: 1, img: '' },
     ]},
   { id: 'protein', label: 'More Protein', sub: 'Milkshake Style · 600g', brand: 'more', e: '🥛',
     hero: img('more-protein-milkshake-aiimg159.jpg', 800),
@@ -82,7 +83,7 @@ const CATS = [
   { id: 'chunky', label: 'Chunky Flavour', sub: 'Dessert Drops · 150g', brand: 'more', e: '🍨',
     hero: img('Chunky_Flavour_Milky_Cream_Cake_2026-04-15_11-21-28__62.jpg', 800),
     thumb: img('Chunky_Flavour_Milky_Cream_Cake_2026-04-15_11-21-28__62.jpg', 100),
-    tu: 12, v: [
+    tu: 13, v: [
       { n: 'Milky Cream Cake', c: 1, img: img('Chunky_Flavour_Milky_Cream_Cake_2026-04-15_11-21-28__62.jpg', 120) },
       { n: 'Donauwelle', c: 1, img: img('chunky-flavour-donauwelle-ai-product.jpg', 120) },
       { n: 'Spaghetti Ice Cream', c: 1, img: img('chunky-flavour-aiimg137.jpg', 120) },
@@ -95,6 +96,7 @@ const CATS = [
       { n: 'Vanilla Chocolate Balls', c: 1, img: img('ai-product-image-4_14f42ed0-5f22-4688-b6eb-551bf4f28451.jpg', 120) },
       { n: 'Banana Perfection', c: 1, img: img('chunky-flavour-aiimg288.jpg', 120) },
       { n: 'Vanilla Chocolate Chip Cookie', c: 1, img: img('chunky-flavour-vanilla-chocolate-chip-cookie-ai-product.jpg', 120) },
+      { n: 'Fudge Brownie', c: 1, img: '' },
     ]},
   { id: 'satisbites', label: 'Protein Satisbites', sub: 'Protein Snack · 2×25g', brand: 'more', e: '🍫',
     hero: img('More_Protein_Satisbites_White_Chocolate_Strawberry_Cream_2026-06-04_21-41-46__12.jpg', 800),
@@ -205,6 +207,12 @@ const CATS = [
     thumb: img('more-protein-porridge-aiimg262.jpg', 100),
     tu: 5, v: [
       { n: 'Original Taste', c: 5, img: img('more-protein-porridge-aiimg262.jpg', 120) },
+    ]},
+  { id: 'esn-ashwa', label: 'ESN Ashwa+', sub: 'Ashwagandha KSM-66 · 120 Kapseln', brand: 'esn', e: '💊',
+    hero: '',
+    thumb: '',
+    tu: 1, v: [
+      { n: '120 Kapseln', c: 1, img: '' },
     ]},
   { id: 'esn-basic', label: 'ESN Basic Whey', sub: 'Protein Powder · 1000g', brand: 'esn', e: '🥛',
     hero: '',
