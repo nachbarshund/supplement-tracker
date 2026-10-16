@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+import { AUTH_COOKIE, isValidToken } from '../../auth'
 import fs from 'fs'
 import path from 'path'
 
@@ -17,7 +18,7 @@ const F = path.join('/tmp', 'ratings.json')
 const EMPTY = { ratings: {}, notes: {} }
 
 function isAuth() {
-  return cookies().get('auth')?.value === process.env.APP_PASSWORD
+  return isValidToken(cookies().get(AUTH_COOKIE)?.value)
 }
 
 async function redis(cmd: (string)[]) {
