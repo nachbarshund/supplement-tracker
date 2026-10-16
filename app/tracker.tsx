@@ -267,6 +267,8 @@ html{scroll-behavior:smooth}
 .search{width:280px}
 .h1{font-size:40px}
 .pills{display:flex;gap:8px;flex-wrap:wrap}
+.prow{display:flex;align-items:center;gap:14px}
+.pnote{margin-left:62px}
 button{font-family:inherit}
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid ${C.teal};outline-offset:2px}
 @media (max-width:900px){
@@ -277,6 +279,11 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid ${C.t
   .groups{grid-template-columns:1fr}
   .bnav{display:flex;position:fixed;left:16px;right:16px;bottom:16px;height:64px;border-radius:24px;background:#fff;box-shadow:0 8px 32px rgba(16,38,45,.14);justify-content:space-around;align-items:center;z-index:50}
   .search{width:100%}
+  .prow{flex-wrap:wrap;row-gap:10px}
+  .prow-stars{flex-basis:100%;display:flex!important;justify-content:space-between}
+  .prow-stars button{flex:1;justify-content:center;padding:8px 0!important;margin:0!important}
+  .prow-stars svg{width:36px;height:36px}
+  .pnote{margin-left:0}
   .h1{font-size:30px}
   .headrow{flex-direction:column;align-items:stretch!important;gap:16px}
 }
@@ -291,7 +298,7 @@ function StarIcon({ on, s = 14 }: { on: boolean; s?: number }) {
   )
 }
 
-function Stars({ v, s = 14, on, label }: { v: number; s?: number; on?: (x: number) => void; label: string }) {
+function Stars({ v, s = 14, on, label, className }: { v: number; s?: number; on?: (x: number) => void; label: string; className?: string }) {
   if (!on) {
     return (
       <span style={{ display: 'inline-flex', gap: 2, alignItems: 'center' }} aria-label={`${v} von 5 Sternen`}>
@@ -300,7 +307,7 @@ function Stars({ v, s = 14, on, label }: { v: number; s?: number; on?: (x: numbe
     )
   }
   return (
-    <span style={{ display: 'inline-flex', gap: 0, alignItems: 'center' }} role="group" aria-label={label}>
+    <span className={className} style={{ display: 'inline-flex', gap: 0, alignItems: 'center' }} role="group" aria-label={label}>
       {[1, 2, 3, 4, 5].map(x => (
         <button key={x} type="button" onClick={() => on(x === v ? 0 : x)} aria-label={`${x} von 5 Sternen`}
           style={{ border: 'none', background: 'none', padding: 4, margin: -2, cursor: 'pointer', display: 'flex' }}>
@@ -374,18 +381,18 @@ function Group({ cat, items, onR, onN, forceOpen }: { cat: Cat; items: Item[]; o
       </div>
       {shown.map((it, i) => (
         <div key={it.v.n} style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '12px 0', borderTop: i ? `1px solid ${C.line}` : 'none' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <div className="prow">
             <Chip src={it.v.img} alt={it.v.n} brand={cat.brand} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5, flexGrow: 1, minWidth: 0 }}>
               <span style={{ fontSize: 15, fontWeight: 600 }}>{it.v.n}</span>
               <span style={{ fontSize: 13, color: C.mute }}>{b.label} · ×{it.v.c}</span>
             </div>
             {it.stars === 0 && <span style={{ fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 999, background: C.openBg, color: C.openFg }}>Offen</span>}
-            <Stars v={it.stars} s={16} on={x => onR(cat.id, it.v.n, x)} label={`${it.v.n} bewerten`} />
+            <Stars className="prow-stars" v={it.stars} s={16} on={x => onR(cat.id, it.v.n, x)} label={`${it.v.n} bewerten`} />
           </div>
           {it.stars > 0 && (
-            <input aria-label={`Notiz zu ${it.v.n}`} placeholder="Notiz…" value={it.note} onChange={e => onN(cat.id, it.v.n, e.target.value)}
-              style={{ marginLeft: 62, background: C.bg, border: 'none', borderRadius: 10, color: C.ink, fontSize: 14, padding: '9px 12px' }} />
+            <input className="pnote" aria-label={`Notiz zu ${it.v.n}`} placeholder="Notiz…" value={it.note} onChange={e => onN(cat.id, it.v.n, e.target.value)}
+              style={{ background: C.bg, border: 'none', borderRadius: 10, color: C.ink, fontSize: 14, padding: '9px 12px' }} />
           )}
         </div>
       ))}
