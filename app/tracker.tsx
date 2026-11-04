@@ -41,7 +41,7 @@ const CATS = [
       { n: 'Cactus Fruit', c: 2, img: img('zerup-zero-sirup-aiimg313.jpg', 120) },
       { n: 'Wild Berry', c: 3, img: '' },
       { n: 'Sex on the Beach', c: 2, img: '' },
-      { n: 'Tropical Fruit Mix', c: 2, img: '' },
+      { n: 'Tropical Fruit Mix', c: 2, img: img('zerup-tropical-fruit-mix-ai-product.jpg', 120) },
       { n: 'Lemon Lime Soda', c: 1, img: '' },
       { n: 'Yuzu', c: 1, img: '' },
       { n: 'Capri Orange', c: 1, img: '' },
