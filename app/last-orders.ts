@@ -1,0 +1,173 @@
+// Letztes Bestelldatum pro Sorte (aus MORE/ESN-Bestellbestätigungen, Stand 05.11.2026)
+export const LAST_ORDER: Record<string, Record<string, string>> = {
+  "backprotein": {
+    "Sahne": '2026-08-16',
+  },
+  "chips": {
+    "Western Style": '2026-07-05',
+    "Ketchup": '2026-07-05',
+    "Bruschetta Rosemary": '2026-07-05',
+  },
+  "chunky": {
+    "Milky Cream Cake": '2026-07-05',
+    "Donauwelle": '2026-07-05',
+    "Spaghetti Ice Cream": '2026-07-05',
+    "Ultra Dark Chocolate": '2026-04-05',
+    "Milchreis Zimt": '2026-04-05',
+    "Waldfrucht Panna Cotta": '2026-04-01',
+    "Morezipan White Choco": '2026-04-01',
+    "Dragonfruit Coconut": '2026-08-16',
+    "Stracciatella": '2026-08-16',
+    "Vanilla Chocolate Balls": '2026-08-16',
+    "Banana Perfection": '2026-08-16',
+    "Vanilla Chocolate Chip Cookie": '2026-08-16',
+    "Fudge Brownie": '2026-11-01',
+    "Hazelnut Nougat Praliné": '2026-11-01',
+  },
+  "clearprotein": {
+    "Peach Passionfruit": '2026-09-20',
+    "Juice Mango": '2026-07-05',
+    "Pink Peach Lemonade": '2026-04-12',
+    "Lemon Iced Tea": '2026-09-20',
+  },
+  "collagen": {
+    "Neutral": '2026-09-06',
+  },
+  "esn-bar": {
+    "Tropical Vanilla": '2026-06-28',
+    "Dark Choco Raspberry": '2026-04-21',
+  },
+  "esn-basic": {
+    "Neutral 1000g": '2026-08-24',
+  },
+  "esn-creamy": {
+    "Dark Cookies & Cream": '2026-09-23',
+  },
+  "esn-drip": {
+    "Pink Grapefruit": '2026-08-24',
+  },
+  "esn-ess": {
+    "180 Kapseln": '2026-09-23',
+  },
+  "esn-flex": {
+    "Dark Chocolate Mocha": '2026-08-24',
+  },
+  "esn-sauce": {
+    "BBQ": '2026-06-28',
+    "Chipotle": '2026-06-28',
+    "Grill Allrounder": '2026-06-28',
+  },
+  "esn-stack": {
+    "210 Kapseln": '2026-09-23',
+  },
+  "esn-whey": {
+    "Strawberry Cream 908g": '2026-07-28',
+    "Peanutbutter Cup 908g": '2026-07-28',
+    "Banana Milk 1000g": '2026-07-28',
+  },
+  "fizi": {
+    "Mojito": '2026-06-07',
+    "Orange": '2026-09-06',
+    "White Peach": '2026-03-22',
+    "Lemon Lime": '2026-03-22',
+    "Mango": '2026-09-06',
+    "Strawberry Vanilla": '2026-11-01',
+  },
+  "griess": {
+    "Original Taste": '2026-09-06',
+  },
+  "milkyccino": {
+    "Chocolate Crispy Cream": '2026-08-16',
+  },
+  "peanutflips": {
+    "Erdnuss": '2026-09-06',
+  },
+  "pic": {
+    "Dark Chocolate Lover": '2026-09-06',
+    "Brownie Marshmallow": '2026-04-12',
+    "Cafe Frappe Style": '2026-07-05',
+    "Dark Choco Cookie": '2026-10-04',
+    "Creme Brulee": '2026-06-07',
+    "Chocolate Amaretto": '2026-04-05',
+    "Salted Caramel Brownie": '2026-03-15',
+    "Latte Macchiato": '2026-08-16',
+    "Toffee Nut Crunch Latte": '2026-10-04',
+    "Dark Chocolate Raspberry": '2026-11-01',
+  },
+  "porridge": {
+    "Original Taste": '2026-09-20',
+  },
+  "protein": {
+    "Chocolate Brownie": '2026-09-20',
+    "Cinnalicious": '2026-04-12',
+    "Choco Coco": '2026-03-15',
+    "Vanilla Ice Cream": '2026-03-15',
+    "Chocolate Crispy Cream": '2026-11-01',
+    "Strawberry": '2026-09-20',
+    "Vanilla Chocolate Chip Cookie": '2026-09-20',
+    "Chocolate Drink": '2026-09-20',
+    "Caramel Cereal Crunch": '2026-11-01',
+  },
+  "satisbites": {
+    "White Choco Strawberry": '2026-06-07',
+    "White Choco Coffee": '2026-09-20',
+    "Dark Choco Hazelnut": '2026-06-07',
+    "Milk Choco Coconut": '2026-04-01',
+    "White Choco Blueberry": '2026-04-01',
+    "Pink Raspberry Cheesecake": '2026-09-20',
+    "Milk Choco Banana Walnut": '2026-09-20',
+  },
+  "sauce": {
+    "Trüffel Mayo": '2026-04-05',
+    "Teriyaki": '2026-04-05',
+    "Balsamico Garlic": '2026-04-05',
+    "BBQ Teriyaki": '2026-07-05',
+    "Light Mayo": '2026-07-05',
+    "Creamy Honey Mustard": '2026-04-05',
+    "Creamy Mushroom": '2026-04-05',
+    "True Curry Ketchup": '2026-09-20',
+    "Sweet & Sour": '2026-11-01',
+    "BBQ": '2026-11-01',
+  },
+  "zerup": {
+    "Mango Lime": '2026-06-07',
+    "Peach Iced Tea": '2026-06-07',
+    "Honey Melon": '2026-07-05',
+    "Cola Orange": '2026-07-05',
+    "Mojito": '2026-06-07',
+    "Strawberry Daiquiri": '2026-11-01',
+    "Hugo": '2026-06-07',
+    "Pina Colada": '2026-03-22',
+    "Lemon Iced Tea": '2026-06-07',
+    "Pink Boost": '2026-03-22',
+    "White Boost": '2026-03-22',
+    "Birne": '2026-06-07',
+    "Apple Cranberry": '2026-06-07',
+    "Peach Hibiscus": '2026-03-22',
+    "Caipirinha": '2026-06-07',
+    "Krauter-Limonade": '2026-11-01',
+    "Birne Melisse": '2026-03-22',
+    "Blackcurrant Kiwi": '2026-06-07',
+    "Pineapple": '2026-11-01',
+    "Cherry Cola": '2026-03-22',
+    "Cherry Pomegranate": '2026-06-07',
+    "White Peach Sour": '2026-06-07',
+    "Mandarin": '2026-03-15',
+    "Hitschies Pfirsich": '2026-04-12',
+    "Infused Strawberry Mint": '2026-09-06',
+    "Cactus Fruit": '2026-09-06',
+    "Wild Berry": '2026-11-01',
+    "Sex on the Beach": '2026-11-01',
+    "Tropical Fruit Mix": '2026-11-01',
+    "Lemon Lime Soda": '2026-11-01',
+    "Yuzu": '2026-11-01',
+    "Capri Orange": '2026-11-01',
+    "Multifruit": '2026-11-01',
+  },
+}
+
+export function fmtOrder(iso?: string) {
+  if (!iso) return ''
+  const [y, m, d] = iso.split('-')
+  return `${d}.${m}.${y}`
+}

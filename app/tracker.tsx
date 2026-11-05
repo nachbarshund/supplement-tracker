@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { LAST_ORDER, fmtOrder } from './last-orders'
 
 // flavour-heaven.de CDN - all MORE Nutrition product images
 // Served via /api/img proxy to avoid CORS/hotlink issues
@@ -413,7 +414,7 @@ function Group({ cat, items, onR, onN, forceOpen }: { cat: Cat; items: Item[]; o
             <Chip src={it.v.img} alt={it.v.n} brand={cat.brand} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5, flexGrow: 1, minWidth: 0 }}>
               <span style={{ fontSize: 15, fontWeight: 600 }}>{it.v.n}</span>
-              <span style={{ fontSize: 13, color: C.mute }}>{b.label} · ×{it.v.c}</span>
+              <span style={{ fontSize: 13, color: C.mute }}>{b.label} · ×{it.v.c}{LAST_ORDER[cat.id]?.[it.v.n] && <span style={{ fontSize: 12, opacity: 0.75 }}> · zuletzt bestellt {fmtOrder(LAST_ORDER[cat.id][it.v.n])}</span>}</span>
             </div>
             {it.stars === 0 && <span style={{ fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 999, background: C.openBg, color: C.openFg }}>Offen</span>}
             <Stars className="prow-stars" v={it.stars} s={16} on={x => onR(cat.id, it.v.n, x)} label={`${it.v.n} bewerten`} />
