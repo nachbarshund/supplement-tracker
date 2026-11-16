@@ -1,4 +1,4 @@
-// Letztes Bestelldatum pro Sorte (aus MORE/ESN-Bestellbestätigungen, Stand 05.11.2026)
+// Letztes Bestelldatum pro Sorte (aus MORE/ESN-Bestellbestätigungen, Stand 16.11.2026)
 export const LAST_ORDER: Record<string, Record<string, string>> = {
   "backprotein": {
     "Sahne": '2026-08-16',
@@ -88,7 +88,7 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Cafe Frappe Style": '2026-07-05',
     "Dark Choco Cookie": '2026-10-04',
     "Creme Brulee": '2026-06-07',
-    "Chocolate Amaretto": '2026-04-05',
+    "Chocolate Amaretto": '2026-11-08',
     "Salted Caramel Brownie": '2026-03-15',
     "Latte Macchiato": '2026-08-16',
     "Toffee Nut Crunch Latte": '2026-10-04',
@@ -125,7 +125,7 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Light Mayo": '2026-07-05',
     "Creamy Honey Mustard": '2026-04-05',
     "Creamy Mushroom": '2026-04-05',
-    "True Curry Ketchup": '2026-09-20',
+    "True Curry Ketchup": '2026-11-08',
     "Sweet & Sour": '2026-11-01',
     "BBQ": '2026-11-01',
   },
