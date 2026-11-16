@@ -13,7 +13,7 @@ const CATS = [
   { id: 'zerup', label: 'Zerup', sub: 'Zero Sirup · 65ml', brand: 'more', e: '🧃',
     hero: img('zerup-mango-lime-ai-product.jpg', 800),
     thumb: img('zerup-mango-lime-ai-product.jpg', 100),
-    tu: 62, v: [
+    tu: 66, v: [
       { n: 'Mango Lime', c: 5, img: img('zerup-mango-lime-ai-product.jpg', 120) },
       { n: 'Peach Iced Tea', c: 4, img: img('zerup-zero-sirup-aiimg122.jpg', 120) },
       { n: 'Honey Melon', c: 4, img: img('zerup-honey-melon-ai-product.jpg', 120) },
@@ -47,11 +47,15 @@ const CATS = [
       { n: 'Yuzu', c: 1, img: '' },
       { n: 'Capri Orange', c: 1, img: '' },
       { n: 'Multifruit', c: 1, img: '' },
+      { n: 'Amaretto', c: 1, img: '' },
+      { n: 'Pink Grapefruit', c: 1, img: '' },
+      { n: 'Fruity Christmas Punch', c: 1, img: '' },
+      { n: 'Plum Cinnamon', c: 1, img: '' },
     ]},
   { id: 'sauce', label: 'Light Gourmet Sauce', sub: 'Kalorienarm · 285ml', brand: 'more', e: '🫙',
     hero: img('light-gourmet-sauce-trueffel-mayo-ai-product.jpg', 800),
     thumb: img('light-gourmet-sauce-trueffel-mayo-ai-product.jpg', 100),
-    tu: 18, v: [
+    tu: 19, v: [
       { n: 'Trüffel Mayo', c: 6, img: img('light-gourmet-sauce-trueffel-mayo-ai-product.jpg', 120) },
       { n: 'Teriyaki', c: 3, img: img('light-sauce-teriyaki-ai-product.jpg', 120) },
       { n: 'Balsamico Garlic', c: 3, img: img('light-sauce-balsamico-garlic-ai-product.jpg', 120) },
@@ -59,20 +63,20 @@ const CATS = [
       { n: 'Light Mayo', c: 1, img: img('light-gourmet-sauce-aiimg193.jpg', 120) },
       { n: 'Creamy Honey Mustard', c: 1, img: img('light-sauce-creamy-honey-mustard-ai-product.jpg', 120) },
       { n: 'Creamy Mushroom', c: 1, img: img('light-sauce-creamy-mushroom-style-ai-product.jpg', 120) },
-      { n: 'True Curry Ketchup', c: 2, img: '' },
+      { n: 'True Curry Ketchup', c: 3, img: '' },
       { n: 'Sweet & Sour', c: 1, img: '' },
       { n: 'BBQ', c: 1, img: '' },
     ]},
   { id: 'pic', label: 'Protein Iced Coffee', sub: 'High Protein · 500g', brand: 'more', e: '☕',
     hero: img('protein-iced-coffee-dark-chocolate-lover-ai-product.jpg', 800),
     thumb: img('protein-iced-coffee-dark-chocolate-lover-ai-product.jpg', 100),
-    tu: 15, v: [
+    tu: 16, v: [
       { n: 'Dark Chocolate Lover', c: 4, img: img('protein-iced-coffee-dark-chocolate-lover-ai-product.jpg', 120) },
       { n: 'Brownie Marshmallow', c: 2, img: img('protein-iced-coffee-brownie-marshmallow-ai-product.jpg', 120) },
       { n: 'Cafe Frappe Style', c: 1, img: img('protein-iced-coffee-cafe-frappe-style-ai-product.jpg', 120) },
       { n: 'Dark Choco Cookie', c: 2, img: img('protein-iced-coffee-dark-cookie-crumble-ai-product.jpg', 120) },
       { n: 'Creme Brulee', c: 1, img: img('protein-iced-coffee-aiimg116.jpg', 120) },
-      { n: 'Chocolate Amaretto', c: 1, img: '' },
+      { n: 'Chocolate Amaretto', c: 2, img: '' },
       { n: 'Salted Caramel Brownie', c: 1, img: img('protein-iced-coffee-aiimg138.jpg', 120) },
       { n: 'Latte Macchiato', c: 1, img: img('protein-iced-coffee-latte-macchiato-ai-product.jpg', 120) },
       { n: 'Toffee Nut Crunch Latte', c: 1, img: '' },
@@ -81,7 +85,7 @@ const CATS = [
   { id: 'protein', label: 'More Protein', sub: 'Milkshake Style · 600g', brand: 'more', e: '🥛',
     hero: img('more-protein-milkshake-aiimg159.jpg', 800),
     thumb: img('more-protein-milkshake-aiimg159.jpg', 100),
-    tu: 17, v: [
+    tu: 20, v: [
       { n: 'Chocolate Brownie', c: 3, img: '' },
       { n: 'Cinnalicious', c: 2, img: '' },
       { n: 'Choco Coco', c: 1, img: '' },
@@ -91,11 +95,14 @@ const CATS = [
       { n: 'Vanilla Chocolate Chip Cookie', c: 2, img: img('more-protein-milkshake-aiimg253.jpg', 120) },
       { n: 'Chocolate Drink', c: 2, img: img('more-protein-milkshake-aiimg148.jpg', 120) },
       { n: 'Caramel Cereal Crunch', c: 1, img: '' },
+      { n: 'Milchreis-Zimt', c: 1, img: '' },
+      { n: 'Hazelnut Nougat Praliné', c: 1, img: '' },
+      { n: 'Kokosmakrone', c: 1, img: '' },
     ]},
   { id: 'chunky', label: 'Chunky Flavour', sub: 'Dessert Drops · 150g', brand: 'more', e: '🍨',
     hero: img('Chunky_Flavour_Milky_Cream_Cake_2026-04-15_11-21-28__62.jpg', 800),
     thumb: img('Chunky_Flavour_Milky_Cream_Cake_2026-04-15_11-21-28__62.jpg', 100),
-    tu: 15, v: [
+    tu: 17, v: [
       { n: 'Milky Cream Cake', c: 1, img: img('Chunky_Flavour_Milky_Cream_Cake_2026-04-15_11-21-28__62.jpg', 120) },
       { n: 'Donauwelle', c: 1, img: img('chunky-flavour-donauwelle-ai-product.jpg', 120) },
       { n: 'Spaghetti Ice Cream', c: 1, img: img('chunky-flavour-aiimg137.jpg', 120) },
@@ -110,6 +117,8 @@ const CATS = [
       { n: 'Vanilla Chocolate Chip Cookie', c: 1, img: img('chunky-flavour-vanilla-chocolate-chip-cookie-ai-product.jpg', 120) },
       { n: 'Fudge Brownie', c: 2, img: '' },
       { n: 'Hazelnut Nougat Praliné', c: 1, img: '' },
+      { n: 'Gebrannte Mandeln', c: 1, img: '' },
+      { n: 'Vanillekipferl', c: 1, img: '' },
     ]},
   { id: 'satisbites', label: 'Protein Satisbites', sub: 'Protein Snack · 2×25g', brand: 'more', e: '🍫',
     hero: img('More_Protein_Satisbites_White_Chocolate_Strawberry_Cream_2026-06-04_21-41-46__12.jpg', 800),
@@ -134,22 +143,24 @@ const CATS = [
   { id: 'clearprotein', label: 'More Clear Protein', sub: 'Juice Style · 600g', brand: 'more', e: '🫗',
     hero: img('clear-protein-iced-tea-style-peach-passionfruit-ai-product.jpg', 800),
     thumb: img('clear-protein-iced-tea-style-peach-passionfruit-ai-product.jpg', 100),
-    tu: 5, v: [
+    tu: 6, v: [
       { n: 'Peach Passionfruit', c: 2, img: img('clear-protein-iced-tea-style-peach-passionfruit-ai-product.jpg', 120) },
       { n: 'Juice Mango', c: 1, img: img('generated-d588a9c7-033c-45f8-833b-31f74a1c08ff.jpg', 120) },
       { n: 'Pink Peach Lemonade', c: 1, img: img('clear-protein-lemonade-style-pink-peach-rings-ai-product.jpg', 120) },
       { n: 'Lemon Iced Tea', c: 1, img: '' },
+      { n: 'Cherry Punch', c: 1, img: '' },
     ]},
   { id: 'fizi', label: 'More FIZI', sub: 'Sparkling · 330ml', brand: 'more', e: '🫧',
     hero: '',
     thumb: '',
-    tu: 7, v: [
+    tu: 8, v: [
       { n: 'Mojito', c: 1, img: '' },
       { n: 'Orange', c: 2, img: '' },
       { n: 'White Peach', c: 1, img: '' },
       { n: 'Lemon Lime', c: 1, img: '' },
       { n: 'Mango', c: 1, img: '' },
       { n: 'Strawberry Vanilla', c: 1, img: '' },
+      { n: 'Apfelstrudel', c: 1, img: '' },
     ]},
   { id: 'esn-stack', label: 'ESN Athlete Stack', sub: 'Men · 210 Kapseln', brand: 'esn', e: '💊',
     hero: '',
@@ -189,8 +200,9 @@ const CATS = [
   { id: 'milkyccino', label: 'More Protein Milkyccino', sub: 'Kaffee Style · 500g', brand: 'more', e: '☕',
     hero: img('more-protein-milkyccino-chocolate-crispy-cream-ai-product.jpg', 800),
     thumb: img('more-protein-milkyccino-chocolate-crispy-cream-ai-product.jpg', 100),
-    tu: 1, v: [
+    tu: 2, v: [
       { n: 'Chocolate Crispy Cream', c: 1, img: img('more-protein-milkyccino-chocolate-crispy-cream-ai-product.jpg', 120) },
+      { n: 'Apple Pie with Vanilla', c: 1, img: '' },
     ]},
   { id: 'backprotein', label: 'More Back Protein', sub: 'Backmischung · 600g', brand: 'more', e: '🧁',
     hero: '',

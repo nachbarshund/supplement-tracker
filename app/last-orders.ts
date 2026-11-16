@@ -9,6 +9,8 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Bruschetta Rosemary": '2026-07-05',
   },
   "chunky": {
+    "Gebrannte Mandeln": '2026-11-08',
+    "Vanillekipferl": '2026-11-08',
     "Milky Cream Cake": '2026-07-05',
     "Donauwelle": '2026-07-05',
     "Spaghetti Ice Cream": '2026-07-05',
@@ -25,6 +27,7 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Hazelnut Nougat Praliné": '2026-11-01',
   },
   "clearprotein": {
+    "Cherry Punch": '2026-11-08',
     "Peach Passionfruit": '2026-09-20',
     "Juice Mango": '2026-07-05',
     "Pink Peach Lemonade": '2026-04-12',
@@ -66,6 +69,7 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Banana Milk 1000g": '2026-07-28',
   },
   "fizi": {
+    "Apfelstrudel": '2026-11-08',
     "Mojito": '2026-06-07',
     "Orange": '2026-09-06',
     "White Peach": '2026-03-22',
@@ -77,6 +81,7 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Original Taste": '2026-09-06',
   },
   "milkyccino": {
+    "Apple Pie with Vanilla": '2026-11-08',
     "Chocolate Crispy Cream": '2026-08-16',
   },
   "peanutflips": {
@@ -98,6 +103,9 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "Original Taste": '2026-09-20',
   },
   "protein": {
+    "Milchreis-Zimt": '2026-11-08',
+    "Hazelnut Nougat Praliné": '2026-11-08',
+    "Kokosmakrone": '2026-11-08',
     "Chocolate Brownie": '2026-09-20',
     "Cinnalicious": '2026-04-12',
     "Choco Coco": '2026-03-15',
@@ -130,6 +138,10 @@ export const LAST_ORDER: Record<string, Record<string, string>> = {
     "BBQ": '2026-11-01',
   },
   "zerup": {
+    "Amaretto": '2026-11-08',
+    "Pink Grapefruit": '2026-11-08',
+    "Fruity Christmas Punch": '2026-11-08',
+    "Plum Cinnamon": '2026-11-08',
     "Mango Lime": '2026-06-07',
     "Peach Iced Tea": '2026-06-07',
     "Honey Melon": '2026-07-05',
